@@ -1,0 +1,34 @@
+,,
+Field,Data Type,Description
+Diss,Text,The specific lyric being analyzed
+Name,Text,Title of the track
+Artist,Text,Creator of the track (Drake or Kendrick)
+Category,Categorical,Primary thematic category of the diss
+Subcategory,Categorical,Specific type of diss within the category
+Release Date,Date,When the track was first released (some songs were released on Youtube or Instagram before formally releasing on Spotify)
+Release Order,Numeric,Chronological position in the battle
+Length of song (min),Numeric,Track duration in minutes
+Streams,Numeric,"Streaming count data from Spotify as of 11pm EST on Feb 13th, 2025"
+,,
+Category,Subcategory,Description
+WOMEN,Infidelity,Claims of infidelity by them or their partners meant to demean.
+WOMEN,Sexual misconduct/predation,Claims of inappropriate sexual behavior or predatory patterns such as pedophilia
+WOMEN,Misogyny,Derogatory comments about women or using women as props in disses
+WOMEN,Abuse,Accusations of being abusive to women
+FAMILY,Parenting abilities/presence,Criticism of child-rearing abilities or absence from children's lives
+FAMILY,Hidden children,References to concealing children or paternity
+FAMILY,Family dynamics,Comments about relationships with family members
+CAREER AND TALENT,Commercial success/lack thereof,"Comments about streaming numbers, chart positions, sales - everything involved with success in the industry and external metrics of success"
+CAREER AND TALENT,Industry Connects/Exploitation,"Comments about industry connections, label relationships or dependencies"
+CAREER AND TALENT,Artistic ability,"Claims about talent, skill, ghostwriting or creative authenticity"
+CAREER AND TALENT,Goading/Provocation/Warning,"Direct challenges, taunts to respond, asking for evidence of claims, warnings issued etc."
+CHARACTER,Behavioural Criticism,"Judgements on behavior. Traits such as dishonestly, promiscuity, addictions etc. "
+CHARACTER,Moral Character,Comments about ethical and moral conduct and more deeply ingrained character flaws. 
+CHARACTER,Public vs private self,Claims about discrepancy between public image and private reality
+VIOLENCE AND THREATS,Physical Harm/Direct Threats,Explicit promises of harm or confrontation
+VIOLENCE AND THREATS,Implied Threats/Intimidation,Intimidation with physical or metaphorical violence and veiled threats
+PHYSICALITY & MASCULINITY,Physical Attributes,"Comments about body, height, appearance or generally any physical features"
+PHYSICALITY & MASCULINITY,Sexual Prowess/Manhood,"Questioning masculinity, sexual capability, homophobic comments"
+STREET CRED AND CULTURAL AUTHENTICITY,Street Cred/Gang Reference,"Claims street credibility, gang affiliations, gang references, names, slang etc."
+STREET CRED AND CULTURAL AUTHENTICITY,Cultural Authenticity,Comments about cultural identity or appropriation
+STREET CRED AND CULTURAL AUTHENTICITY,Geographical Claims,References to city/regional representation or territorial authenticity

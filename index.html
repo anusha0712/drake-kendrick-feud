@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drake vs Kendrick: What Hurts The Male Ego?</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  
+  <style>
+    body {
+      margin: 0;
+      font-size: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #111111;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .content {
+      max-width: 640px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 5em;
+      line-height: 1.1;
+      margin: 0;
+      padding: 0.5em 0;
+    }
+    
+    .drake-text {
+      color: #DB9D47;
+    }
+    
+    .kendrick-text {
+      color: #7851A9;
+    }
+
+    .subhead {
+      font-size: 1.4em;
+      color: #888;
+      max-width: 700px;
+    }
+
+    .timeline-section {
+      padding: 0 0 2em 0;
+      width: 100%;
+      max-width: 100%;
+      background-color: #191919;
+      margin: 0;
+    }
+    
+    .timeline-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .timeline-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      border-radius: 4px;
+    }
+    
+    .timeline-description {
+      max-width: 1040px; 
+      margin: 2em auto 2em;
+      padding: 0 1em;
+      text-align: left;
+      font-size: 1.1em;
+      color: #cccccc;
+    }
+
+    .scrolly-container {
+      position: relative;
+      display: flex;
+      background-color: #111111;
+      margin-top: 0;
+    }
+
+    .sticky-thing {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex-basis: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .steps-container {
+      flex-basis: 40%;
+      min-width: 300px;
+      padding: 0 1rem;
+    }
+
+    .step {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      opacity: 0.3;
+      transition: opacity 0.5s;
+    }
+
+    .step.is-active {
+      opacity: 1;
+    }
+
+    .step-content {
+      background: #222222;
+      padding: 2rem;
+      border-radius: 8px;
+      font-size: 1.1em;
+      margin: 0;
+      border: 1px solid #333;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .viz-container {
+      position: relative;
+      width: 95%;
+      height: 90%;
+      max-width: 900px;
+      max-height: 800px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .viz-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border: none !important;
+      outline: none !important;
+      background-color: transparent !important;
+      pointer-events: none;
+    }
+
+    .viz-image.active {
+      opacity: 1;
+    }
+  
+
+    .pull-quote-kendrick {
+      font-size: 1.8em;
+      padding: 1.5em;
+      margin: 1.5em 0;
+      border-left: 4px solid #7851A9;
+      background: #222;
+      font-style: italic;
+    }
+
+    .pull-quote-drake {
+      font-size: 1.8em;
+      padding: 1.5em;
+      margin: 1.5em 0;
+      border-left: 4px solid #DB9D47;
+      background: #222;
+      font-style: italic;
+    }
+
+    .quote-attribution {
+      font-size: 0.7em;
+      color: #888;
+      margin-top: 1em;
+      font-style: normal;
+    }
+
+    .legend {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      background: transparent;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .legend-item span {
+      font-size: 14px;
+      color: white;
+    }
+
+    .legend-kendrick { background-color: #7851A9; }
+    .legend-drake { background-color: #DB9D47; }
+
+    .static-section {
+      background: #222222;
+      padding: 4em 0;
+      margin-top: 4em;
+    }
+
+    .static-section h2 {
+      color: #ffffff;
+      font-size: 2.5em;
+      margin-bottom: 1em;
+    }
+
+    .iframe-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: #333;
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+      .footer {
+      background: #111111;
+      text-align: center;
+      font-size: 0.8em;
+      margin-top: 0;
+      padding: 2em 0;
+      color: #cccccc;
+      border-top: 1px solid #333333;
+    }
+
+    .footer .content {
+      max-width: 640px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .footer a {
+      color: #DB9D47;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #7851A9;
+    }
+
+    .share-icons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .share-icons a {
+      color: #888;
+      transition: color 0.3s;
+    }
+
+    .share-icons a:hover {
+      color: #DB9D47;
+    }
+
+    .share-icons i {
+      font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .scrolly-container {
+        flex-direction: column;
+        margin-top: 0;
+      }
+
+      .sticky-thing {
+        flex-basis: 65vh;
+        height: 65vh;
+      }
+
+      .steps-container {
+        flex-basis: auto;
+      }
+
+      .step {
+        min-height: 60vh;
+      }
+
+      .viz-container {
+        width: 100%;
+        height: 55vh;
+        margin-bottom: 40px;
+      }
+
+      .legend {
+        bottom: 5px;
+      }
+
+      h1 {
+        font-size: 3em;
+      }
+      
+      .drake-text, .kendrick-text {
+        display: inline-block;
+      }
+      
+      .timeline-image {
+        max-height: 200px;
+        object-fit: contain;
+      }
+      
+      .timeline-description {
+        font-size: 0.9em;
+        margin: 0.5em auto 1em;
+      }
+    }
+  </style>
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
+</head>
+<body>
+  <div class="header">
+    <h1><span class="drake-text">Drake</span> vs <span class="kendrick-text">Kendrick</span>:<br>What Hurts The Male Ego?</h1>
+    <p class="subhead">A data-driven analysis of contemporary hip-hop's most iconic rivalry</p>
+    <div class="share-icons">
+      <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')"
+        aria-label="Share on Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#"
+        onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')"
+        aria-label="Share on LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')"
+        aria-label="Share on Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      
+    </div>
+  </div>
+
+  <section class="timeline-section">
+    <div class="timeline-container">
+      <div class="svg-wrapper" style="position: relative; display: inline-block;">
+        <img src="charts/timeline.svg" alt="Drake vs Kendrick Timeline" class="timeline-image" />
+        <a href="#scrolly-video" id="pauseOverlay" style="
+          position: absolute; 
+          left: 49%; 
+          top: 87%; 
+          width: 2%; 
+          height: 6%;
+          display: block;
+          cursor: pointer;
+          z-index: 10;">
+        </a>
+      </div>
+      <p class="timeline-description">In 2024, you didn’t have to be a Rap enthusiast to find yourself unable to tear your eyes away from the Hip-Hop
+      industry’s very own schoolyard showdown – better known as Drake vs Kendrick Lamar’s Rap feud. A ticking time-bomb, the
+      slow burn of simmering tensions finally erupted with J. Cole’s incendiary verse on “First Person Shooter” on Drake’s
+      album, “For All The Dogs”, where he alleges that the “Big 3” of Rap and Hip-Hop are J. Cole, Drake and Kendrick Lamar. In
+      his verse on Metro Boomin’s “Like That”, Kendrick responds to J. Cole, declaring that there is no big three - “It’s just
+      big me”. And therein was the spark that ignited the most iconic contemporary rap battle, ripping apart artistic
+      abilities, cultural identities, industry exploitation, masculinity and generally weaponizing sexual misconduct, women
+      and family dynamics as the world watched in morbid fascination.</p>
+      
+      <p class="timeline-description">The grid below offers a visual exploration of Drake and Kendrick’s diss tracks, with each square representing an
+      insulting lyric, separated and orded by dominant categories. With the goal of conducting a data-driven analysis on the nuances of each
+      rapper’s insults to the other, I manually compiled, sorted and categorized over 500 lyrics from all the 10 songs in the
+      feudal discography using Genius.com annotations, Reddit posts and analysis by music-focused industry publications like BillBoard.</p>
+
+
+    </div>
+  </section>
+
+  <section id="scrolly-video" class="scrolly-container">
+    <div class="steps-container">
+      <div class="step" data-category="all_categories">
+        <div class="step-content">
+          <p>Considering the entire universe of insults in the discography, Kendrick rapped approximately 15% more disses than Drake.
+          
+          </p>One of Drake’s songs, “Buried Alive Interlude pt.2”, only contains an intro and
+          a verse and was released on instagram as part of his promotions for his full length diss track, “Family Matters”. The
+          song is a parody on Kendrick’s intro and verse on “Buried Alive Interlude” that featured on Drake’s 2011 album “Take
+          Care” and was meant to show how Drake believes that he helped kickstart Kendrick’s career - a theme that comes up often. </p>
+
+          <p>Shorter diss-tracks like this reduced his overall repertoire of insults</p>
+  
+          <div class="pull-quote-drake">
+            "Took you on your first tour with us tryna catch a vibе / I was headline, you was standin' on the sidе" 
+            <div class="quote-attribution">- Drake, "Buried Alive Interlude pt.2"</div>
+          </div>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+            
+          </div>
+           
+        </div>
+      </div>
+
+      <div class="step" data-category="career">
+        <div class="step-content">
+          <p>When it comes to bragging about their careers, both artists are prolific, making this the largest category of insults
+          overall (30%) as well as individually. But their approaches differ significantly.</p>
+          
+          <p>Drake tends to focus most of his disses on commercial success (or Kendrick’s lack thereof) and Kendrick’s futile
+          attempts to take Drake’s spot at the top of the industry. His lyrics are also more provocative, goading Kendrick to
+          respond and threatening to come down hard on Kendrick.</p>
+          
+          <p>Kendrick directs all his lyrical energy towards artistic ability, lording his superiority of the craft over Drake
+          implying that Kendrick has distanced himself from showy metrics of success that Drake seems to prefer.</p>
+          
+          </p>And yet the irony lies in the fact that a club hit like “Not Like Us”, often expected more of Drake than Kendrick, won
+          Kendrick the feud.</p>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+            
+          </div>
+
+        </div>
+      </div>
+
+      <div class="step" data-category="character">
+        <div class="step-content">
+          <p>While this is the second largest category overall, Kendrick dominates it with over 50% more disses than Drake, primarily
+          centered around behavioral critics.</p>
+
+          <p>He refers to Drake as a liar and a terrible person, calling out his fake alpha male personality, gambling habits and
+          Drake’s well known habit of “sneaky dissing” is his music, which is when an artist disrespects some in their song
+          without mentioning them or owning up to it.</p>
+
+          <p>Drake in turn accuses him of constantly needing attention and tossing accusations without ever having proof. Drake
+          believes that Kendrick’s attitude towards him is a projection of Kendrick’s own trauma.</p>
+          <div class="pull-quote-kendrick">
+            "A pathetic master manipulator, I can smell the tales on you now"
+            <div class="quote-attribution">- Kendrick Lamar, "Euphoria"</div>
+          </div>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+            
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="step" data-category="women">
+        <div class="step-content">
+          <p>In the conflict between the two men, women are strongly weaponized, making this the third largest category. It makes up
+          15% of all insults, with astonishingly equal contribution by both.</p>
+
+          <p>Drake uses Kendrick’s partner, Whitney in most of this category’s insults, alleging her consistent infidelity with
+          Kendrick’s bodyguard, calling into question his son’s true parentage and leveling serious allegations of domestic
+          violence on Kendrick.</p>
+
+          <p>Kendrick hits Drake back with bars accusing him of consistent and pervasive sexual misconduct including pedophilia,
+          predatory behavior, associating with sex-offenders and hypersexualising Black women.</p>
+
+          <p>It is worth noting that in their relentlessness of accusing each other of misogyny and problematic behavior, the two
+          artists display significant misogynist behavior themselves.</p>
+          
+          <p>Aside from referring to women as “bitches” and “hos” for
+          most of both their discographies, Kendrick questions the characters of women that Drake has sexual relations with saying
+          they are not “real women” (a dig at the mother of Drake’s child, a former adult film actress) and Drake dehumanises
+          women while talking about his sexual relations with women of all races and making passes at taken women as his personal
+          conquests.</p>
+
+          <div class="pull-quote-drake">
+            "When you put your hands on your girl, is it self-defense 'cause she bigger than you?"
+            <div class="quote-attribution">- Drake, "Family Matters"</div>
+          </div>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="step" data-category="streetcred">
+        <div class="step-content">
+          <p>A prevailing theme in the feud is cultural authenticity with Drake and Kendrick accusing each other of not having as
+          much “street cred” as they lead their listeners to believe. Kendrick once again dominates in this category, with almost
+          thrice as many disses than Drake.</p>
+
+          <p>Kendrick goes back and forth between calling out Drake for not being “Black” enough, given that Drake is biracial with
+          an African-American father, and accusing Drake of using Black Culture to further his own agenda and success. In
+          “Euphoria”, Kendrick says that he hates that Drake co-opts the N-word, considering that it’s not his culture. In Drake’s
+          next track after Kendrick’s “Euphoria” and “6:16 in LA”, Drake doubles the use of the N-word.</p>
+
+          <p>Drake questions Kendrick’s own cultural authenticity, saying that his label consistently makes him rap for commercial
+          successful, white artists and Drake uses his verses to inflate his own African-American descent with bars on his own
+          street credibility and Kendrick’s lack thereof and rails against Kendrick’s alleged savior complex.</p>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="step" data-category="violence">
+        <div class="step-content">
+          <p>A sense of violence is pervasive through the whole discography with Kendrick and Drake threatening each other with both
+          direct and implied harm.</p>
+
+          <p>Both incorporate vocabulary associated with guns, gun parts and harm through their verses as well as threatening to
+          physically and metaphorically put the other in their place if they don’t back off. For example, Kendrick compares himself to YNW Melly, a rapper who was
+          charged with the double homicide of two other rappers who were his friends. And Drake makes explicit threats about gunfights and even defecating on his enemies.</p>
+
+          <div class="pull-quote-drake">
+            "I'll slit your throat with the razor"
+            <div class="quote-attribution">- Drake, "The Heart Part 6"</div>
+          </div>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+            
+          </div>
+
+        </div>
+      </div>
+
+      <div class="step" data-category="family">
+        <div class="step-content">
+          <p>Drake with “Family Matters” and Kendrick with “Meet the Grahams” (released less than an hour after “Family Matters”)
+          each have one song entirely dedicated to dissing each other's familial dynamics.</p>
+
+          <p>Drake goes after Kendrick’s relationship with his son, and partner Whitney, doubling down on the allegations of domestic
+          violence, infidelity and accusing Kendrick of never being affectionate with his son. Kendrick’s “Meet The Grahams” is
+          written like an open letter where he systematically addresses Drake’s mother, father, son and exposes the existence of a
+          supposedly hidden daughter that Drake refutes in “The Heart Part 6”. Kendrick calls out his father for being an absentee
+          parent resulting in Drake continuing that cycle with his children. He offers to mentor Adonis, Drake’s son, because
+          Drake doesn’t have any of the qualities to be a good father.</p>
+
+          <p>May 3rd, when four out of the ten tracks were released*, marked a turning point in the feud with each artist
+          greenlighting permission to get really personal. Adarsh Tyagi, a 16-year high school student from San Diego, loves rap
+          but still finds the feud childish. “Neither of them had any proof for what they were saying about each other. It’s never
+          okay to bring family into these things – but it’s the whole reason this blew up, because they said all this unproven
+          stuff.” He says that he doesn’t particularly support either of the two rappers in the feud.</p>
+
+          <p>*(“Meet the Grahams” was on midnight EST, May 4th but because it was so close to the previous song, it’s widely seen as
+          part of the may 3rd releases)</p>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+            
+          </div>
+
+        </div>
+      </div>
+
+      <div class="step" data-category="physical">
+        <div class="step-content">
+          <p>Both rappers equally peppered their feudal verses with direct disses about each other’s physicality and masculinity.</p>
+          <p>From Drake’s end, he constantly belittles Kendrick with multi-layered bars about his short stature and Drake’s physical
+          superiority. Time and again there have been rumours about Drake’s abs being the result of surgery along with others
+          involving him getting a Brazilian Butt Lift (BBL). Kendrick jumps on this to retaliate by mocking Drake for lying about
+          his surgery, alleged Ozempic use, BBL and also throws some lyrics in about hating his general style of walking, talking
+          and dressing.</p>
+          <p>There’s also an element of using sexual prowess and masculinity to insult. For Drake, it involves talking about women
+          wanting him and also boasting about being sexually well endowed. For Kendrick, his bars on masculinity involve calling
+          Drake effeminate. Both artists exhibit problematic undertones of homophobia, using lyrics to allude to each other or
+          family members are not being straight, intended as an insult.</p>
+
+          <div class="pull-quote-kendrick">
+            "Don't cut them corners like your daddy did, fuck what Ozempic did"
+            <div class="quote-attribution">- Kendrick, "Meet The Grahams"</div>
+
+          </div>
+
+          <div class="share-icons">
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + window.location.href, '_blank')">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-thing">
+      <div class="viz-container">
+        
+        
+        <img class="viz-image" id="all_categories-viz-1" src="charts/all_categories.svg" alt="Overview comparison" />
+        
+        <img class="viz-image" id="career-viz-1" src="charts/career.svg" alt="Career references comparison" />
+        <img class="viz-image" id="career-viz-2" src="charts/career_sub.svg" alt="Career references alternate" />
+        
+        <img class="viz-image" id="character-viz-1" src="charts/character.svg" alt="Character references comparison" />
+        <img class="viz-image" id="character-viz-2" src="charts/character_sub.svg" alt="Character references alternate" />
+        
+        <img class="viz-image" id="women-viz-1" src="charts/women.svg" alt="Women references comparison" />
+        <img class="viz-image" id="women-viz-2" src="charts/women_sub.svg" alt="Women references alternate" />
+        
+        <img class="viz-image" id="streetcred-viz-1" src="charts/streetcred.svg" alt="Street Cred references comparison" />
+        <img class="viz-image" id="streetcred-viz-2" src="charts/streetcred_sub.svg" alt="Street Cred references alternate" />
+        
+        <img class="viz-image" id="violence-viz-1" src="charts/violence.svg" alt="Violence references comparison" />
+        <img class="viz-image" id="violence-viz-2" src="charts/violence_sub.svg" alt="Violence references alternate" />
+        
+        <img class="viz-image" id="family-viz-1" src="charts/family.svg" alt="Family references comparison" />
+        <img class="viz-image" id="family-viz-2" src="charts/family_sub.svg" alt="Family references alternate" />
+        
+        <img class="viz-image" id="physical-viz-1" src="charts/physical.svg" alt="Physical references comparison" />
+        <img class="viz-image" id="physical-viz-2" src="charts/physical_sub.svg" alt="Physical references alternate" />
+        
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color legend-kendrick"></div>
+            <span>Kendrick</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color legend-drake"></div>
+            <span>Drake</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+        
+  <section class="static-section">
+    <div class="content">
+      <h2>How It Ends</h2>
+      <p> Ultimately, Kendrick was crowned winner by popular vote for his smash-hit success “Not Like Us”, a searing character assassination
+      of Drake that coincidentally became a nightclub hit, a Grammy winner and the fastest Hip-Hop song to hit one million
+      streams on Spotify – a record previously held by Drake’s “God’s Plan”. And Drake’s response, “The Heart Part 6”, was
+      overshadowed completely</p>
+
+      <p>On February 4th, 2025, Drake opened his Anita Max Win Tour at the AC Arena in Perth, Australia, wearing a ‘bullet hole’
+      ridden hoodie with real smoke billowing from behind, implying that he might have lost the battle, but stating to his
+      fans that “the year is now 2025, and no matter what, Drizzy Drake is very much alive.” Five days later, Kendrick
+      unabashedly celebrated his victory by performing “Not Like Us” at the Super Bowl Halftime Show, with 65,719 fans in
+      attendance (and thousands more virtually) hitting the controversial "A minor" lyric.</p>
+
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="content">
+      <p>Anusha Subramanian is a Data Journalist at Columbia Journalism School</p>
+      <p>All grapics are atrributed to the author. You can find the code for this project <a href="https://github.com/anusha0712/drake-kendrick-feud" target="_blank">here</a>
+      </p>
+    </div>
+  </div>
+        
+  <script>
+
+    const allCategories = [
+      'all_categories', 'career', 'character', 'women', 'streetcred',
+      'violence', 'family', 'physical'
+    ];
+
+    function preloadImages() {
+      return new Promise((resolve) => {
+        let loadedCount = 0;
+        let totalCount = 0;
+
+        allCategories.forEach(category => {
+          totalCount++;
+          const img1 = new Image();
+          img1.src = `charts/${category}.svg`;
+          img1.onload = img1.onerror = () => {
+            loadedCount++;
+            if (loadedCount === totalCount) resolve();
+          };
+
+          if (category !== 'all_categories') {
+            totalCount++;
+            const img2 = new Image();
+            img2.src = `charts/${category}_sub.svg`;
+            img2.onload = img2.onerror = () => {
+              loadedCount++;
+              if (loadedCount === totalCount) resolve();
+            };
+          }
+        });
+      });
+    }
+
+    function updateVisualization(category, progress = 0) {
+      document.querySelectorAll('.viz-image.active').forEach(viz => {
+        viz.classList.remove('active');
+      });
+      const vizId = category === 'all_categories'
+        ? `${category}-viz-1`
+        : `${category}-viz-${progress > 0.4 ? 2 : 1}`;
+      const activeViz = document.getElementById(vizId);
+      if (activeViz) {
+        activeViz.classList.add('active');
+      }
+    }
+
+    
+    let scroller = scrollama();
+
+   
+    window.addEventListener('load', () => {
+      preloadImages().then(() => {
+        
+        scroller.setup({
+          step: '.step',
+          offset: 0.5,
+          progress: true,
+          debug: false
+        })
+        .onStepEnter(response => {
+          const category = response.element.dataset.category;
+          document.querySelectorAll('.step').forEach(step => step.classList.remove('is-active'));
+          response.element.classList.add('is-active');
+          updateVisualization(category, 0);
+        })
+        .onStepProgress(response => {
+          const category = response.element.dataset.category;
+          updateVisualization(category, response.progress);
+        });
+
+        
+        scroller.resize();
+      });
+    });
+  </script>
+
+</body>
+</html>
