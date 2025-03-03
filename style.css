@@ -1,0 +1,603 @@
+/* Variables */
+:root {
+  --drake-color: #DB9D47;
+  --kendrick-color: #7851A9;
+  --bg-color: #111111;
+  --secondary-bg: #191919;
+  --tertiary-bg: #222222;
+  --text-color: #ffffff;
+  --secondary-text: #cccccc;
+  --muted-text: #888888;
+  --border-color: #333333;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-size: 18px;
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--drake-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--kendrick-color);
+}
+
+/* Add space between paragraphs */
+p {
+  margin-bottom: 1.2em;
+}
+
+/* Layout Components */
+.content {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* Header Section */
+.header {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+h1 {
+  color: var(--text-color);
+  font-size: 4.5em;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0.5em 0;
+  position: relative;
+  z-index: 1;
+}
+
+.drake-text {
+  color: var(--drake-color);
+}
+
+.kendrick-text {
+  color: var(--kendrick-color);
+}
+
+.subhead {
+  font-size: 1.4em;
+  color: var(--muted-text);
+  max-width: 700px;
+  margin-top: -10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Timeline Section */
+.timeline-section {
+  padding: 3em 0;
+  width: 100%;
+  background-color: var(--secondary-bg);
+}
+
+/* Timeline container full width */
+.timeline-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding: 0;
+}
+
+.svg-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Make timeline image full width */
+.timeline-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  border-radius: 4px;
+}
+
+/* Adjust timeline description container */
+.timeline-description {
+  max-width: 1200px; 
+  margin: 2em auto;
+  padding: 0 2em;
+  text-align: left;
+  font-size: 1.1em;
+  color: var(--secondary-text);
+}
+
+/* Timeline link positioning */
+.timeline-link {
+  position: absolute; 
+  left: 46%; /* Slightly wider */
+  top: 84%;
+  width: 8%; /* Much wider touch target */
+  height: 12%; /* Taller touch target */
+  display: block;
+  cursor: pointer;
+  z-index: 10;
+  background-color: transparent;
+}
+
+/* Scrollytelling Section */
+.scrolly-container {
+  position: relative;
+  display: flex;
+  background-color: var(--bg-color);
+  margin: 0;
+}
+
+.sticky-thing {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.steps-container {
+  width: 40%;
+  padding: 0 1rem 2rem;
+}
+
+.step {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  opacity: 0.3;
+  transition: opacity 0.5s;
+}
+
+.step.is-active {
+  opacity: 1;
+}
+
+.step-content {
+  background: var(--tertiary-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  font-size: 1.1em;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.step-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Visualization Styles */
+.viz-container {
+  position: relative;
+  width: 95%;
+  height: 90%;
+  max-width: 800px;
+  max-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+  overflow: hidden; /* Prevents overflow on small screens */
+}
+
+.viz-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  max-width: 100%; /* Ensures SVG doesn't overflow */
+}
+
+.viz-image.active {
+  opacity: 1;
+  z-index: 1; /* Ensure active image is on top */
+}
+
+/* Add loading indicator for visualizations */
+.viz-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 1s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Show loading indicator when images are loading */
+.viz-container.loading::before {
+  opacity: 1;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Legend */
+.legend {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  background: rgba(17, 17, 17, 0.7);
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.legend-item span {
+  font-size: 14px;
+  color: white;
+}
+
+.legend-kendrick { background-color: var(--kendrick-color); }
+.legend-drake { background-color: var(--drake-color); }
+
+/* Quotes */
+.pull-quote-kendrick {
+  font-size: 1.6em;
+  padding: 1.2em;
+  margin: 1.2em 0;
+  border-left: 4px solid var(--kendrick-color);
+  background: var(--tertiary-bg);
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+}
+
+.pull-quote-drake {
+  font-size: 1.6em;
+  padding: 1.2em;
+  margin: 1.2em 0;
+  border-left: 4px solid var(--drake-color);
+  background: var(--tertiary-bg);
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+}
+
+.quote-attribution {
+  font-size: 0.7em;
+  color: var(--muted-text);
+  margin-top: 1em;
+  font-style: normal;
+}
+
+/* Static Section */
+.static-section {
+  background: var(--tertiary-bg);
+  padding: 4em 0;
+  margin-top: 0;
+}
+
+.static-section h2 {
+  color: var(--text-color);
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+/* Footer */
+.footer {
+  background: var(--bg-color);
+  text-align: center;
+  font-size: 0.8em;
+  padding: 2em 0;
+  color: var(--secondary-text);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Social Share */
+.share-icons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 20px 0 10px;
+}
+
+.share-icons a {
+  color: var(--muted-text);
+  transition: color 0.3s;
+}
+
+.share-icons a:hover {
+  color: var(--drake-color);
+}
+
+.share-icons i {
+  font-size: 20px;
+}
+
+/* Mobile layout - visualization on top, text below */
+@media (max-width: 768px) {
+  /* Change the layout direction for mobile */
+  .scrolly-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Make visualization container fixed at top */
+  .sticky-thing {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 45vh; /* Adjust height as needed */
+    min-height: 270px;
+    z-index: 10;
+    background-color: #111111; /* Solid black background */
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Adjust visualization container */
+  .viz-container {
+    width: 100%;
+    height: 100%;
+    background-color: #111111;
+    padding-bottom: 40px; /* Space for legend */
+    margin-bottom: 0;
+  }
+  
+  /* Make visualizations fit properly */
+  .viz-image {
+    max-width: 90%;
+    max-height: 85%;
+    object-fit: contain;
+  }
+  
+  /* Fix legend position */
+  .legend {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(17, 17, 17, 0.9);
+    border: 1px solid #333;
+    padding: 5px 15px;
+    border-radius: 4px;
+  }
+  
+  /* Text section container */
+  .steps-container {
+    width: 100%;
+    padding: 10px 15px 60px;
+    background-color: #111111;
+  }
+  
+  /* Adjust step height/spacing */
+  .step {
+    min-height: auto;
+    padding: 15px 0;
+    margin-bottom: 15px;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+  
+  /* Enhance active step */
+  .step.is-active {
+    opacity: 1;
+  }
+  
+  /* Make text cards stand out better */
+  .step-content {
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #222222;
+    border: 1px solid #333;
+  }
+  
+  /* Ensure paragraph spacing on mobile too */
+  p {
+    margin-bottom: 1em;
+  }
+  
+  /* General mobile adjustments */
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 2.8em;
+    padding: 0.3em 0;
+  }
+  
+  .subhead {
+    font-size: 1.2em;
+  }
+  
+  .pull-quote-drake, .pull-quote-kendrick {
+    font-size: 1.3em;
+    padding: 1em;
+  }
+  
+  .timeline-image {
+    max-height: 400px;
+    object-fit: contain;
+  }
+  
+  .timeline-description {
+    padding: 0 15px;
+  }
+}
+
+/* Small phone adjustments */
+@media (max-width: 480px) {
+  .sticky-thing {
+    height: 42vh; /* Slightly smaller on very small screens */
+  }
+  
+  .step-content {
+    padding: 12px;
+    font-size: 0.95em;
+  }
+  
+  h1 {
+    font-size: 2.2em;
+  }
+  
+  .subhead {
+    font-size: 1em;
+    padding: 0 10px;
+  }
+  
+  .step {
+    padding: 12px 0;
+    margin-bottom: 12px;
+  }
+  
+  .pull-quote-drake, .pull-quote-kendrick {
+    font-size: 1.1em;
+    padding: 0.8em;
+  }
+  
+  .static-section h2 {
+    font-size: 1.8em;
+  }
+  
+  .timeline-container {
+    padding: 0;
+  }
+  
+  .timeline-description {
+    font-size: 0.9em;
+    margin: 1.5em auto;
+  }
+  
+  .content {
+    padding: 0 15px;
+  }
+  
+  .legend {
+    bottom: 0;
+    padding: 5px 8px;
+  }
+  
+  .legend-item {
+    gap: 5px;
+  }
+  
+  .legend-item span {
+    font-size: 10px;
+  }
+  
+  .share-icons {
+    gap: 12px;
+  }
+  
+  .share-icons i {
+    font-size: 18px;
+  }
+}
+
+/* Ensure text remains readable on very small screens */
+@media (max-width: 320px) {
+  body {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  .step-content {
+    padding: 10px;
+  }
+  
+  .sticky-thing {
+    height: 38vh;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media screen and (orientation: landscape) and (max-width: 900px) {
+  .sticky-thing {
+    height: 60vh; /* Taller in landscape */
+  }
+  
+  .viz-container {
+    height: 55vh;
+    margin-bottom: 10px;
+  }
+  
+  /* Give more room for visualization in landscape */
+  .step {
+    padding: 12px 0;
+  }
+  
+  /* Add more bottom padding in landscape mode */
+  .steps-container {
+    padding-bottom: 60px;
+  }
+}
